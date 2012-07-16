@@ -1,5 +1,5 @@
 <?php
-include_once ('/home1/usarugb1/public_html/competition/header.php');
+include_once ('./header.php');
 ?>
 
 <h1>Create a Competition</h1>
@@ -95,5 +95,5 @@ include_once ('/home1/usarugb1/public_html/competition/header.php');
 </form/>
 
 <?
-include_once ('/home1/usarugb1/public_html/competition/footer.php');
+include_once ('./footer.php');
 ?>

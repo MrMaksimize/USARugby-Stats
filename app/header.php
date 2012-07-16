@@ -1,5 +1,5 @@
 <?php
-include_once ('/home1/usarugb1/public_html/competition/include.php');
+include_once ('./include.php');
 echo "<a href='/competition/'>Competitions</a> - ";
 echo "<a href='/competition/help.php'>Help</a> - ";
 

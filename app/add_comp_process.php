@@ -1,5 +1,5 @@
 <?
-include_once ('/home1/usarugb1/public_html/competition/include_mini.php');
+include_once ('./include_mini.php');
 
 $name = mysql_real_escape_string($_POST['name']);
 $type = mysql_real_escape_string($_POST['type']);

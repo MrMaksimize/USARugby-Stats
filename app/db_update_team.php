@@ -1,5 +1,5 @@
 <?php
-include_once ('/home1/usarugb1/public_html/competition/header.php');
+include_once ('./header.php');
 
 //verify we can edit.  1 is usarugby only.  Redirect if not?
 if(editCheck(1)){
@@ -29,10 +29,10 @@ echo "<p>Insert the club's full FSI name and USA Rugby ID number.</p>\n";
 
 echo "<h2>Clubs Currently in Database</h2>";
 echo "<div id='clublist'>";
-include_once ('/home1/usarugb1/public_html/competition/db_update_team_list.php');
+include_once ('./db_update_team_list.php');
 echo "</div>";
 
 }
-include_once ('/home1/usarugb1/public_html/competition/footer.php');
+include_once ('./footer.php');
 mysql_close();
 ?>

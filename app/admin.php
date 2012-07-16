@@ -1,5 +1,5 @@
 <?php
-include_once ('/home1/usarugb1/public_html/competition/include.php');
+include_once ('./include.php');
 
 //verify we can edit.  1 is usarugby only.  Redirect if not?
 if(editCheck(1)){
@@ -12,6 +12,6 @@ echo "<a href='/competition/users.php'>User Management</a><br/>";
 
 }
 
-include_once ('/home1/usarugb1/public_html/competition/footer.php');
+include_once ('./footer.php');
 
 ?>

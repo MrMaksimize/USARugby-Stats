@@ -1,5 +1,5 @@
 <?php
-include_once ('/home1/usarugb1/public_html/competition/include.php');
+include_once ('./include.php');
 
 $team_id = $_GET['id'];
 
@@ -11,14 +11,14 @@ echo "<h1>{$row['name']}</h1>";
 
 echo "<h2>Event Rosters</h2>";
 //Get the rosters for this team
-include_once ('/home1/usarugb1/public_html/competition/team_event_rosters.php');
+include_once ('./team_event_rosters.php');
 echo "<br/>";
 
 echo "<h2>Game Rosters</h2>";
 //Get the rosters for this team
-include_once ('/home1/usarugb1/public_html/competition/team_game_rosters.php');
+include_once ('./team_game_rosters.php');
 echo "<br/>";
 
-include_once ('/home1/usarugb1/public_html/competition/footer.php');
+include_once ('./footer.php');
 mysql_close();
 ?>

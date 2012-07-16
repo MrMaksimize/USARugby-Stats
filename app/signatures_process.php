@@ -1,5 +1,5 @@
 <?
-include_once ('/home1/usarugb1/public_html/competition/include_mini.php');
+include_once ('./include_mini.php');
 
 $ref= $_POST['ref'];
 $num4 = $_POST['num4'];

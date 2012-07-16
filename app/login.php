@@ -1,6 +1,6 @@
 <?php 
 //Start session
-include_once ('/home1/usarugb1/public_html/competition/session.php');
+include_once ('./session.php');
 
 $user=$_SESSION['user'];
 

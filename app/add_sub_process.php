@@ -1,5 +1,5 @@
 <?
-include_once ('/home1/usarugb1/public_html/competition/include_mini.php');
+include_once ('./include_mini.php');
 
 $player_on_id = $_POST['player_on'];
 $player_off_id = $_POST['player_off'];

@@ -1,5 +1,5 @@
 <?php
-include_once ('/home1/usarugb1/public_html/competition/include.php'); 
+include_once ('./include.php'); 
 ?>
 
 <h1>Help</h1>
@@ -31,5 +31,5 @@ Simply click on any team name to go to that team's page.
 From here you can look at the team's Event Roster or Game Rosters.</p>
 
 <?php
-include_once ('/home1/usarugb1/public_html/competition/footer.php'); 
+include_once ('./footer.php'); 
 ?>

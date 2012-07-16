@@ -1,5 +1,5 @@
 <?php
-include_once ('/home1/usarugb1/public_html/competition/header.php');
+include_once ('./header.php');
 
 //verify we can edit.  1 is usarugby only.  Redirect if not?
 if(editCheck(1)){
@@ -33,6 +33,6 @@ echo "The fourth column is the player's last name.<br/><br/>";
 
 <?
 }
-include_once ('/home1/usarugb1/public_html/competition/footer.php');
+include_once ('./footer.php');
 mysql_close();
 ?>

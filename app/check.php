@@ -1,7 +1,7 @@
 <?php
 //Start session and get DB info and start DB connection
-include_once ('/home1/usarugb1/public_html/competition/session.php');
-include_once ('/home1/usarugb1/public_html/competition/db.php');
+include_once ('./session.php');
+include_once ('./db.php');
 
 //Get login and pw entered from login screen to check in DB
 $login=mysql_real_escape_string($_POST['login']);

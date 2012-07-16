@@ -1,5 +1,5 @@
 <?php
-include_once ('/home1/usarugb1/public_html/competition/include_mini.php');
+include_once ('./include_mini.php');
 
 $comp_id = $_GET['id'];
 ?>
@@ -139,5 +139,5 @@ echo "<option value='{$row1['id']}'>{$row1['name']}</option>";
 <script type='text/javascript'>$('.error').hide();</script>
 
 <?
-include_once ('/home1/usarugb1/public_html/competition/footer.php');
+include_once ('./footer.php');
 ?>

@@ -1,5 +1,5 @@
 <?php
-include_once ('/home1/usarugb1/public_html/competition/header.php');
+include_once ('./header.php');
 
 echo "<h1>Event Roster</h1>";
 
@@ -23,12 +23,12 @@ echo "<div id='eroster'>";
 //to allow the teams to edit, make it editCheck(1,$team_id)
 if(editCheck(1)){
 //output names in lastname, firstname convention in dropdowns
-include_once ('/home1/usarugb1/public_html/competition/edit_event_roster.php');
+include_once ('./edit_event_roster.php');
 }
 else
 {
 //output names in lastname, firstname convention
-include_once ('/home1/usarugb1/public_html/competition/player_sort.php');
+include_once ('./player_sort.php');
 }
 echo "</div>";
 

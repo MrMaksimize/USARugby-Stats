@@ -1,5 +1,5 @@
 <?php
-include_once ('/home1/usarugb1/public_html/competition/include_mini.php');
+include_once ('./include_mini.php');
 
 echo "<table><tr>";
 $query = "SELECT * FROM `comps` WHERE hidden=0";

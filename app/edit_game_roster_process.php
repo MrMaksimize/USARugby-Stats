@@ -1,5 +1,5 @@
 <?
-include_once ('/home1/usarugb1/public_html/competition/include_mini.php');
+include_once ('./include_mini.php');
 
 //Get team_id to prevent direct URL access from another team
 $team_id = $_POST['team_id'];

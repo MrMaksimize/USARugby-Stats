@@ -1,5 +1,5 @@
 <?
-include_once ('/home1/usarugb1/public_html/competition/include_mini.php');
+include_once ('./include_mini.php');
 
 $player_id = $_POST['cardplayer'];
 $game_id = $_POST['card_game_id'];

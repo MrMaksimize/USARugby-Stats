@@ -1,5 +1,5 @@
 <?php
-include_once ('/home1/usarugb1/public_html/competition/include_mini.php');
+include_once ('./include_mini.php');
 
 if(!$game_id){$game_id=$_GET['gid'];}
 if(!$team_id){$team_id=$_GET['tid'];}

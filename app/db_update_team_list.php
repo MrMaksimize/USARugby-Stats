@@ -1,5 +1,5 @@
 <?php
-include_once ('/home1/usarugb1/public_html/competition/include_mini.php');
+include_once ('./include_mini.php');
 
 //echo out a list of all clubs so they don't duplicate
 $query = "SELECT * FROM `teams` WHERE 1 ORDER BY name";
