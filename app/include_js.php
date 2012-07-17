@@ -1,4 +1,4 @@
 <?php
-echo "<script src='/competition/jquery.js'></script>";
-echo "<script src='/competition/jquery_funcs.js'></script>";
+echo "<script src='jquery.js'></script>";
+echo "<script src='jquery_funcs.js'></script>";
 ?>

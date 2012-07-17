@@ -30,7 +30,7 @@ echo "<td><input type='checkbox' id='awayc' name='awayc' class='signbox' value='
 
 }
 
-echo "<input type='hidden' id='srefresh' name='srefresh' value='/competition/signatures.php?id=$game_id' />";
+echo "<input type='hidden' id='srefresh' name='srefresh' value='signatures.php?id=$game_id' />";
 echo "<input type='hidden' id='game_id' name='game_id' value='$game_id' />";
 echo "</table>";
 echo "</form>";

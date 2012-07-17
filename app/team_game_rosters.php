@@ -8,7 +8,7 @@ while ($row=mysql_fetch_assoc($result)){
   while ($row2=mysql_fetch_assoc($result2)){
   
   $ko = date('M d - g:ia',strtotime($row2['kickoff']));
-  echo "<a href='/competition/game_roster.php?gid={$row2['id']}&tid=$team_id'>";
+  echo "<a href='game_roster.php?gid={$row2['id']}&tid=$team_id'>";
   echo teamNameNL($row2['away_id'])." @ ".teamNameNL($row2['home_id'])." - $ko</a><br/>";
 
   }

@@ -34,8 +34,8 @@ echo "<option value='{$row['id']}'>{$row['name']}</option>";
 <label class="error" for="team" id="team_error">This field is required.</label>
 <br/>
 
-<input type='hidden' name='trefresh' id='trefresh' value='<? echo "/competition/comp_teams.php?id=$comp_id"; ?>'>
-<input type='hidden' name='lrefresh' id='lrefresh' value='<? echo "/competition/add_team.php?id=$comp_id"; ?>'>
+<input type='hidden' name='trefresh' id='trefresh' value='<? echo "comp_teams.php?id=$comp_id"; ?>'>
+<input type='hidden' name='lrefresh' id='lrefresh' value='<? echo "add_team.php?id=$comp_id"; ?>'>
 <input type='hidden' name='comp_id' id='comp_id' value='<? echo $comp_id; ?>'>
 <input type='submit' name='submit' class='button' id='add_team' value='Add Team'>
 </form/>

@@ -5,7 +5,7 @@ $query = "SELECT id, short FROM `teams` WHERE id = $id";
 $result = mysql_query($query);
 while ($row=mysql_fetch_assoc($result)){
 
-$output = "<a href='/competition/team.php?id={$row['id']}'>{$row['short']}</a>";
+$output = "<a href='team.php?id={$row['id']}'>{$row['short']}</a>";
 }
 return ($output);
 }
@@ -15,7 +15,7 @@ $query = "SELECT id, name FROM `teams` WHERE id = $id";
 $result = mysql_query($query);
 while ($row=mysql_fetch_assoc($result)){
 
-$output = "<a href='/competition/team.php?id={$row['id']}'>{$row['name']}</a>";
+$output = "<a href='team.php?id={$row['id']}'>{$row['name']}</a>";
 }
 return ($output);
 }
@@ -35,7 +35,7 @@ $query = "SELECT id, name FROM `comps` WHERE id = $id";
 $result = mysql_query($query);
 while ($row=mysql_fetch_assoc($result)){
 
-$output = "<a href='/competition/comp.php?id={$row['id']}'>{$row['name']}</a>";
+$output = "<a href='comp.php?id={$row['id']}'>{$row['name']}</a>";
 }
 return ($output);
 }

@@ -18,7 +18,7 @@ if (editCheck())
 echo "<td><form style='margin: 0; padding: 0' name='dForm{$row['id']}' id='dForm{$row['id']}'>";
 echo "<input name='dCard{$row['id']}' class='dCard' id='dCard{$row['id']}' type='button' value='Delete Card' />";
 echo "<input type='hidden' class='dId' name='event_id' id='event_id' value='{$row['id']}' />";
-echo "<input type='hidden' name='refresh' id='refresh' value='/competition/game_card_events.php?game_id=$game_id' />";
+echo "<input type='hidden' name='refresh' id='refresh' value='game_card_events.php?game_id=$game_id' />";
 
 echo "</form></td>\r";
 }

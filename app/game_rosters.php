@@ -55,9 +55,9 @@ echo "</tr>\r";
 }
 
 if(editCheck()){
-echo "<td colspan='2'><a href='/competition/game_roster.php?gid=$game_id&tid=$away_id'>Edit Roster</a></td>\n";
+echo "<td colspan='2'><a href='game_roster.php?gid=$game_id&tid=$away_id'>Edit Roster</a></td>\n";
 echo "<td>&nbsp;</td>";
-echo "<td colspan='2'><a href='/competition/game_roster.php?gid=$game_id&tid=$home_id'>Edit Roster</a></td>\n";
+echo "<td colspan='2'><a href='game_roster.php?gid=$game_id&tid=$home_id'>Edit Roster</a></td>\n";
 }
 
 echo "</table>";

@@ -4,7 +4,7 @@ include_once ('./header.php');
 
 <h1>Create a Competition</h1>
 
-<form name='addcomp' id='addcomp' method='POST' action='/competition/add_comp_process.php'>
+<form name='addcomp' id='addcomp' method='POST' action='add_comp_process.php'>
 
 <label for="name" id="name_label">Name</label>
 <input id='name' name='name' type='text' size='30'>
