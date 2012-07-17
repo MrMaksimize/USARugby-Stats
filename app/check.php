@@ -23,18 +23,18 @@ $_SESSION['access']=$row['access'];
 }
 
 $_SESSION['user']=$login;
-header('Location: http://usarugby.us/competition');
+header('Location: http://' . $_SERVER['HTTP_HOST']);
 
 }
 else //if we didn't get a match send them back to login
 {
 $_SESSION['warning']='Incorrect username or password.  Try again.';
-header('Location: http://usarugby.us/competition/login.php');
+header('Location: http://'. $_SERVER['HTTP_HOST'] . '/login.php');
 }
 
 }
 else //if the username or password was empty send them back to login
 {$_SESSION['warning']="Username or Password was empty.  Try again.";
-header('Location: http://usarugby.us/competition/login.php');
+header('Location: http://' . $_SERVER['HTTP_HOST'] . '/login.php');
 }
 ?>

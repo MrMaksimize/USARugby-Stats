@@ -14,6 +14,6 @@ echo "Password<input type='password' name='pw' />\n";
 echo "<input type='submit' name='submit' class='normal' value='Login'>\n";
 echo "</form>\n";
 }else{
-header('Location: http://usarugby.us/competition');
+header('Location: http://' . $_SERVER['HTTP_HOST']);
 }
 ?>
