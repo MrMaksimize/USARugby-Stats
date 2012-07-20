@@ -92,8 +92,8 @@ include_once ('./header.php');
 <br/>
 
 <input type='submit' name='submit' class='button' id='add_comp' value='Create Competition'>
-</form/>
+</form>
 
-<?
+<?php
 include_once ('./footer.php');
 ?>

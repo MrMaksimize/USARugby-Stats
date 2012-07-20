@@ -130,14 +130,14 @@ echo "<option value='{$row1['id']}'>{$row1['name']}</option>";
 <label class="error" for="away" id="away_error">This field is required.</label>
 <br/>
 
-<input type='hidden' name='grefresh' id='grefresh' value='<? echo "comp_games.php?id=$comp_id"; ?>'>
-<input type='hidden' name='comp_id' id='comp_id' value='<? echo $comp_id; ?>'>
+<input type='hidden' name='grefresh' id='grefresh' value='<?php echo echo "comp_games.php?id=$comp_id"; ?>'>
+<input type='hidden' name='comp_id' id='comp_id' value='<?php echo $comp_id; ?>'>
 <input type='submit' name='submit' class='button' id='add_game' value='Add Game'>
-</form/>
+</form>
 
 <!--this is to hide the errors after a jquery refresh upon adding a new team to the comp-->
 <script type='text/javascript'>$('.error').hide();</script>
 
-<?
+<?php
 include_once ('./footer.php');
 ?>

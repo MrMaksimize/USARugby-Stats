@@ -33,7 +33,7 @@ echo "<option value='$homep'>".playerName($homep)."</option>";
 </select>
 <label class="error" for="cardplayer" id="cardplayer_error">This field is required.</label>
 
-<input type='hidden' name='cardrefresh' id='cardrefresh' value='<? echo "http://$_SERVER['HTTP_HOST']/game_card_events.php?game_id=$game_id"; ?>'>
-<input type='hidden' name='card_game_id' id='card_game_id' value='<? echo "$game_id"; ?>'>
+<input type='hidden' name='cardrefresh' id='cardrefresh' value='<?php echo "http://$_SERVER['HTTP_HOST']/game_card_events.php?game_id=$game_id"; ?>'>
+<input type='hidden' name='card_game_id' id='card_game_id' value='<?php echo "$game_id"; ?>'>
 <input type='submit' name='submit' class='button' id='add_card' value='Add Card'>
-</form/>
+</form>

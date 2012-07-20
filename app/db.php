@@ -1,4 +1,4 @@
-<?
+<?php
 $username='usarugb1_comp1';
 $password='nM34@gV7';
 $database='usarugb1_comp';
