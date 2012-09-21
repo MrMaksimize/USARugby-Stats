@@ -20,7 +20,7 @@ if (empty($team_id)) {
     if (empty($team_games)) {
       ?>
       <div class="alert alert-no-games">
-        <h4>No Games Yet!</h4>
+        <h4>No Games Yet.</h4>
       </div>
       <?php
     }

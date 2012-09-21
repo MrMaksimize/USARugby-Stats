@@ -120,7 +120,7 @@ if ((!$ops = $request->get('ops')) || empty($iframe)) {
     else {
       ?>
       <div class="alert alert-no-game">
-        <h4>No Game Information Available Yet!</h4>
+        <h4>No Game Information Available Yet.</h4>
       </div>
       <?php
     }
