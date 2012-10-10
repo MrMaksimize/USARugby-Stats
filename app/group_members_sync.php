@@ -3,7 +3,7 @@ include_once './include.php';
 use Source\APSource;
 
 $teams = array();
-$client = APSource::factory();
+$client = new APSource;
 
 $teams = $db->getAllTeams();
 ?>
@@ -46,20 +46,18 @@ if (isset($_POST['submit'])) {
 function sync_group_members($group_uuid, $client, $db) {
     $existing_players = $db->getTeamPlayers($group_uuid);
     $added = 0;
-    $command = $client->getCommand('GetGroupMembers', array('uuid' => $group_uuid, 'limit' => 0));
-    $client->execute($command);
-    $members = json_decode($command->getResponse()->getBody());
+    $members = $client->getGroupMembers($group_uuid);
+
     foreach ($members as $member) {
-        $member = (array) $member;
-        if (!$existing_players || !key_exists($member['uuid'], $existing_players)) {
+        if (!$existing_players || !key_exists($member->uuid, $existing_players)) {
             $now = date('Y-m-d H:i:s');
             $player_info = array(
                 'user_create' => $_SESSION['user'],
                 'last_update' => $now,
-                'uuid' => $member['uuid'],
+                'uuid' => $member->uuid,
                 'team_uuid' => $group_uuid,
-                'firstname' => $member['fname'],
-                'lastname' => $member['lname']
+                'firstname' => $member->fname,
+                'lastname' => $member->lname
             );
             $db->addPlayer($player_info);
             $added++;

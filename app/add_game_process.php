@@ -11,7 +11,7 @@ $home = $_POST['home'];
 $away = $_POST['away'];
 $comp_id = $_POST['comp_id'];
 
-$client = APSource::factory();
+$client = new APSource;
 $home_team = $db->getTeam($home);
 $away_team = $db->getTeam($away);
 $userTimezone = new DateTimeZone((isset($config['timezone']) ? $config['timezone'] : 'America/Chicago'));
