@@ -2,7 +2,7 @@
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Guzzle\Http\Client;
-use Guzzle\Http\Plugin\OauthPlugin;
+use Guzzle\Plugin\Oauth\OauthPlugin;
 use AllPlayers\Component\HttpClient as APClient;
 
 require_once __DIR__.'/../vendor/autoload.php';

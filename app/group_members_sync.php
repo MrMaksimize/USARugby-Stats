@@ -6,24 +6,29 @@ $teams = array();
 $client = new APSource;
 
 $teams = $db->getAllTeams();
-?>
-<form name="teams_sync" id="teams_sync" method="POST" action="">
-    <label for="sync_all">Sync all:</label>
-    <input type="checkbox" name="sync_all" id="sync_all" />
-    <br />
-    <?php
-    foreach ($teams as $uuid => $team) {
-        echo "$uuid - {$team['name']} ";
-        ?>
-        <input type="checkbox" name="team_<?php echo $uuid; ?>" />
+if (!empty($teams)) {
+    ?>
+    <form name="teams_sync" id="teams_sync" method="POST" action="">
+        <label for="sync_all">Sync all:</label>
+        <input type="checkbox" name="sync_all" id="sync_all" />
         <br />
         <?php
-    }
-    ?>
-    <input class="button" name="submit" type="submit" value="Sync Team(s)" />
-</form>
+        foreach ($teams as $uuid => $team) {
+            echo "$uuid - {$team['name']} ";
+            ?>
+            <input type="checkbox" name="team_<?php echo $uuid; ?>" />
+            <br />
+            <?php
+        }
+        ?>
+        <input class="button" name="submit" type="submit" value="Sync Team(s)" />
+    </form>
 
-<?php
+    <?php
+}
+else {
+    echo "There are no teams to sync players for.";
+}
 
 if (isset($_POST['submit'])) {
     $added = 0;
@@ -63,7 +68,7 @@ function sync_group_members($group_uuid, $client, $db) {
                 'uuid' => $member->uuid,
                 'team_uuid' => $group_uuid,
                 'firstname' => $member->fname,
-                'lastname' => $member->lname
+                'lastname' => $member->lname,
                 'picture_url' => $picture_url,
             );
             $db->addPlayer($player_info);

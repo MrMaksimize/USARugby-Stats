@@ -5,7 +5,7 @@ namespace Source;
 use AllPlayers\Client;
 use Monolog\Logger;
 use Guzzle\Service\Inspector;
-use Guzzle\Http\Plugin\OauthPlugin;
+use Guzzle\Plugin\Oauth\OauthPlugin;
 use Guzzle\Service\Resource\ResourceIteratorClassFactory;
 
 class APSource extends Client {
@@ -18,7 +18,7 @@ class APSource extends Client {
             'token' => $attributes['auth_token'],
             'token_secret' => $attributes['auth_secret']
         );
-        parent::__construct($base_url, $logger, 'oauth', NULL, $oauth_config);
+        parent::__construct($base_url, $logger, NULL, 'oauth', $oauth_config);
     }
 
     public function getGroupMembers($group_uuid) {
