@@ -235,17 +235,18 @@ $app->get('/standings', function() use ($app) {
         $team_uuid = $app['request']->get('group_uuid');
         $team = $db->getTeam($team_uuid);
         $comps = $db->getAllCompetitions();
+        $comps_for_standings = array();
         foreach ($comps as $id => $comp) {
             if (in_array((string) $team['id'], explode(',', $comp['top_groups']))) {
-                $comp_id = $id;
+                $comps_for_standings[] = $id;
                 // @todo.
             }
         }
-        if (empty($comp_id)) {
+        if (empty($comps_for_standings)) {
             return '<div class="alert alert-no-game"><h4>No Standings Information Available For This Team</h4></div>';
         }
     }
-    $doc = get_standings($comp_id, $db);
+    $doc = get_standings($comps_for_standings, $db);
 
     $doc->saveXML();
     $xslDoc = new DOMDocument();
@@ -267,13 +268,14 @@ $app->get('/standings.xml', function() use ($app) {
         $team_uuid = $app['request']->get('group_uuid');
         $team = $db->getTeam($team_uuid);
         $comps = $db->getAllCompetitions();
+        $comps_for_standings = array();
         foreach ($comps as $id => $comp) {
             if (in_array((string) $team['id'], explode(',', $comp['top_groups']))) {
-                $comp_id = $id;
+                $comps_for_standings[] = $id;
             }
         }
     }
-    $doc = get_standings($comp_id, $db);
+    $doc = get_standings($comps_for_standings, $db);
 
     $doc->formatOutput = true;
     return $doc->saveXML();
@@ -281,51 +283,59 @@ $app->get('/standings.xml', function() use ($app) {
 
 $app->run();
 
-function get_standings($comp_id, $db) {
+function get_standings($comps_for_standings, $db) {
     $doc = new DomDocument('1.0');
-    $comp_data = $db->getCompetition($comp_id);
-    $comp_type = $comp_data['type'] == 1 ? '15s' : '7s';
     $root = $doc->appendChild($doc->createElement('sports-content'));
     $root->setAttribute('xmlns', "http://iptc.org/std/SportsML/2008-04-01/");
     $root->setAttribute('xmlns:xsi', "http://www.w3.org/2001/XMLSchema-instance");
 
-    $standing = $root->appendChild($doc->createElement('standing'));
-    $teams = $db->getCompetitionTeams($comp_id);
-    foreach ($teams as $uuid => $team) {
-        $record = $db->getTeamRecordInCompetition($team['id'], $comp_id);
-        $team_records[$uuid] = $record;
-        $points[$uuid] = $record['points'];
-        $games_played[$uuid] = $record['total_games'];
-    }
 
-    // Sort by ranking.
-    array_multisort($points, SORT_DESC, $games_played, SORT_ASC, $teams);
-    $rank = 1;
-    foreach ($teams as $uuid => $team) {
-        $record = $team_records[$uuid];
-        $team_node = $standing->appendChild($doc->createElement('team'));
+    foreach ($comps_for_standings as $comp_id) {
+        $points = array();
+        $games_played = array();
+        $teams = array();
+        $comp_data = $db->getCompetition($comp_id);
+        $comp_type = $comp_data['type'] == 1 ? '15s' : '7s';
+        $standing = $root->appendChild($doc->createElement('standing'));
+        $standing->setAttribute('content-label', 'Competition ' . $comp_data['name']);
+        $standing->setAttribute('date-label', '(' . $comp_data['start_date'] . ' to ' . $comp_data['end_date'] . ')');
+        $teams = $db->getCompetitionTeams($comp_id);
+        foreach ($teams as $uuid => $team) {
+            $record = $db->getTeamRecordInCompetition($team['id'], $comp_id);
+            $team_records[$uuid] = $record;
+            $points[$uuid] = $record['points'];
+            $games_played[$uuid] = $record['total_games'];
+        }
 
-        $team_metadata = $team_node->appendChild($doc->createElement('team-metadata'));
-        $name = $team_metadata->appendChild($doc->createElement('name'));
-        $name->setAttribute('full', $team['name']);
+        // Sort by ranking.
+        array_multisort($points, SORT_DESC, $games_played, SORT_ASC, $teams);
+        $rank = 1;
+        foreach ($teams as $uuid => $team) {
+            $record = $team_records[$uuid];
+            $team_node = $standing->appendChild($doc->createElement('team'));
 
-        $team_stats = $team_node->appendChild($doc->createElement('team-stats'));
-        $team_stats->setAttribute('events-played', $record['total_games']);
-        $team_stats->setAttribute('standing-points', $record['points']);
-        $ranking = $team_stats->appendChild($doc->createElement('rank'));
-        $ranking->setAttribute('value', (string) $rank);
-        $rank++;
+            $team_metadata = $team_node->appendChild($doc->createElement('team-metadata'));
+            $name = $team_metadata->appendChild($doc->createElement('name'));
+            $name->setAttribute('full', $team['name']);
 
-        $totals = $team_stats->appendChild($doc->createElement('outcome-totals'));
-        $totals->setAttribute('wins', $record['total_wins']);
-        $totals->setAttribute('losses', $record['total_losses']);
-        $totals->setAttribute('ties', $record['total_ties']);
-        $totals->setAttribute('winning-percentage', $record['percent']);
-        $totals->setAttribute('points-scored-for', $record['favor']);
-        $totals->setAttribute('points-scored-against', $record['against']);
-        if ($comp_type == '15s') {
-            $totals->setAttribute('try-bonus', $record['try_bonus_total']);
-            $totals->setAttribute('loss-bonus', $record['loss_bonus_total']);
+            $team_stats = $team_node->appendChild($doc->createElement('team-stats'));
+            $team_stats->setAttribute('events-played', $record['total_games']);
+            $team_stats->setAttribute('standing-points', $record['points']);
+            $ranking = $team_stats->appendChild($doc->createElement('rank'));
+            $ranking->setAttribute('value', (string) $rank);
+            $rank++;
+
+            $totals = $team_stats->appendChild($doc->createElement('outcome-totals'));
+            $totals->setAttribute('wins', $record['total_wins']);
+            $totals->setAttribute('losses', $record['total_losses']);
+            $totals->setAttribute('ties', $record['total_ties']);
+            $totals->setAttribute('winning-percentage', $record['percent']);
+            $totals->setAttribute('points-scored-for', $record['favor']);
+            $totals->setAttribute('points-scored-against', $record['against']);
+            if ($comp_type == '15s') {
+                $totals->setAttribute('try-bonus', $record['try_bonus_total']);
+                $totals->setAttribute('loss-bonus', $record['loss_bonus_total']);
+            }
         }
     }
 
