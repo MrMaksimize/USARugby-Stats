@@ -95,7 +95,7 @@ class DataSource {
      */
     public function getTeam($id, $params = "") {
         $search_id = DataSource::uuidIsValid($id) ? $this->getSerialIDByUUID('teams', $id) : $id;
-        $query = "SELECT * from `teams` WHERE id=$search_id" . $params;
+        $query = "SELECT * from `teams` WHERE id='$search_id'" . $params;
         $result = mysql_query($query);
         $team = mysql_fetch_assoc($result);
         if (!empty($team['resources'])) {
