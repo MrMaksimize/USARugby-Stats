@@ -9,14 +9,23 @@
 
 function teamName($id, $link = TRUE)
 {
-    $query = "SELECT id, short FROM `teams` WHERE id = $id";
+    $query = "SELECT id, short, logo_url FROM `teams` WHERE id = $id";
     $result = mysql_query($query);
     while ($row = mysql_fetch_assoc($result)) {
+        $logo_url = empty($row['logo_url']) ? '' : $row['logo_url'];
+          $picture_url = getFullImageUrl($row['logo_url']);
         if (!empty($link)) {
-          $output = "<a href='team.php?id={$row['id']}'>{$row['short']}</a>";
+          $output = "<div class='team-name link'>";
+          $output .= "<a href='team.php?id={$row['id']}'>";
+          $output .= "<img src='$picture_url' class='img-polaroid group-logo group-logo-mini' alt='{$row['short']}' onerror='imgError(this);'/>";
+          $output .= "{$row['short']}</a>";
+          $output .= "</div>";
         }
         else {
-          $output = $row['short'];
+          $output = "<div class='team-name'>";
+          $output .= "<img src='$picture_url' class='img-polaroid group-logo group-logo-mini' alt='{$row['short']}' onerror='imgError(this);'/>";
+          $output .= "{$row['short']}";
+          $output .= "</div>";
         }
     }
 

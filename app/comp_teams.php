@@ -13,7 +13,8 @@ while ($row=mysql_fetch_assoc($result)) {
     $result2 = mysql_query($query2);
     while ($row2=mysql_fetch_assoc($result2)) {
 
-        echo "<td><a href='team.php?id={$row2['id']}'>{$row2['short']}<a/></td>";
+        $team_name = teamName($row2['id'], TRUE);
+        echo "<td>$team_name</td>";
 
         if (editCheck(1)) {
             echo "<td><form style='margin: 0; padding: 0' name='dTeam{$row2['id']}' id='dTeam{$row2['id']}'>";
