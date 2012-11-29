@@ -29,10 +29,10 @@ if ((!$ops = $request->get('ops')) || empty($iframe)) {
       $game = $db->getGame($game_id);
       // Game Information.
       if (in_array('game_info', $ops)) {
+        echo "<div id='info' class='row-fluid'>\r";
         if (empty($iframe)) {
-          echo "<h1>Game Info</h1>";
+         // echo "<h1>Game Info</h1>";
         }
-        echo "<div id='info'>\r";
         // Get the teams and kickoff and competition.
         include_once './game_info.php';
         echo "</div>\r";

@@ -1,5 +1,5 @@
 <?php
-
+use Source\DataSource;
 /**
  *
  *
@@ -9,24 +9,19 @@
 
 function teamName($id, $link = TRUE)
 {
-    $query = "SELECT id, short, logo_url FROM `teams` WHERE id = $id";
-    $result = mysql_query($query);
-    while ($row = mysql_fetch_assoc($result)) {
-        $logo_url = empty($row['logo_url']) ? '' : $row['logo_url'];
-        $picture_url = getFullImageUrl($row['logo_url']);
-        $output = '';
-        if (!empty($link)) {
-          $output .= "<a href='team.php?id={$row['id']}'>";
-          $output .= "<img src='$picture_url' class='img-polaroid group-logo group-logo-mini' alt='{$row['short']}' onerror='imgError(this);'/>";
-          $output .= "{$row['short']}</a>";
-        }
-        else {
-          $output .= "<img src='$picture_url' class='img-polaroid group-logo group-logo-mini' alt='{$row['short']}' onerror='imgError(this);'/>";
-          $output .= "{$row['short']}";
-        }
+    $loader = new Twig_Loader_Filesystem(__DIR__.'/views');
+    $twig = new Twig_Environment($loader, array());
+    $db = new DataSource();
+    $team = $db->getTeam($id);
+    $output = '';
+    if ($team) {
+        $team['link'] = $link;
+        $logo_url = empty($team['logo_url']) ? '' : $team['logo_url'];
+        $team['logo_url'] = getFullImageUrl($team['logo_url']);
+        $output = $twig->render('team_name.twig', $team);
     }
 
-    return (isset($output) && $output) ? $output : '';
+    return $output;
 }
 
 function getFullImageUrl($partial_image_url) {
