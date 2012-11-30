@@ -104,7 +104,7 @@ class DataSource {
         return $team;
     }
 
-    public function addTeam($team_info) {
+    public function addupdateTeam($team_info) {
         $columns = array('id', 'hidden', 'user_create', 'uuid', 'name', 'short', 'resources', 'logo_url', 'description', 'type');
         $values = '';
         $count = 1;
@@ -119,7 +119,7 @@ class DataSource {
             }
             $count++;
         }
-        $query = "INSERT INTO `teams` (" . implode(',', $columns) . ") VALUES ($values)";
+        $query = "REPLACE INTO `teams` (" . implode(',', $columns) . ") VALUES ($values)";
         $result = mysql_query($query);
         return $result;
     }
@@ -477,7 +477,58 @@ class DataSource {
         return $result;
     }
 
-    public function addPlayer($player_info) {
+    public function getPlayerGameEvents($player_id, $comp_id = NULL, $game_id = NULL) {
+        $player_search_id = DataSource::uuidIsValid($player_id) ? $this->getSerialIDByUUID('players', $player_id) : $player_id;
+        $game_events = array();
+        if (empty($player_search_id)) {
+            return FALSE;
+        }
+        $query = "SELECT
+                  ge.game_id,
+                  ge.player_id,
+                  ge.type,
+                  ge.minute,
+                  evt.name,
+                  evt.value,
+                  gam.home_id,
+                  gam.away_id,
+                  gam.kickoff
+                  FROM game_events ge
+                  JOIN  games gam ON (ge.game_id = gam.id)
+                  JOIN event_types evt ON (ge.type = evt.event_id)
+                  WHERE ge.player_id=$player_search_id";
+        $result = mysql_query($query);
+        while ($row = mysql_fetch_assoc($result)) {
+          $game_events[] = $row;
+        }
+        return $game_events;
+    }
+
+    public function getGamesWithPlayerOnRoster($player_id, $comp_id = NULL) {
+        $player_search_id = DataSource::uuidIsValid($player_id) ? $this->getSerialIDByUUID('players', $player_id) : $player_id;
+        if (empty($player_search_id)) {
+            return FALSE;
+        }
+        $games = array();
+        $query = "SELECT DISTINCT 
+                  g.id as game_id, 
+                  g.home_id as home_id, 
+                  g.away_id as away_id, 
+                  g.kickoff as kickoff
+                  FROM players p
+                  JOIN teams t ON (p.team_uuid = t.uuid)
+                  JOIN games g ON (t.id IN (g.home_id, g.away_id))
+                  JOIN game_rosters gr ON (g.id = gr.game_id)
+                  WHERE gr.player_ids LIKE '%-$player_search_id-%'";
+        $result = mysql_query($query);
+        while ($row = mysql_fetch_assoc($result)) {
+          $games[] = $row;
+        }
+        return $games;
+    }
+
+
+    public function addupdatePlayer($player_info) {
         $columns = $this->showColumns('players');
         $values = '';
         $count = 1;
@@ -494,20 +545,7 @@ class DataSource {
             }
             $count++;
         }
-        $query = "INSERT INTO `players` (" . implode(',', $columns) . ") VALUES ($values)";
-        $result = mysql_query($query);
-        return $result;
-    }
-
-    public function updatePlayer($id, $player_info) {
-        $search_id = DataSource::uuidIsValid($id) ? $this->getSerialIDByUUID('players', $id) : $id;
-        $now = date('Y-m-d H:i:s');
-        $team_uuid = $user_info['team_uuid'];
-        $player_uuid = $user_info['player_uuid'];
-        $first_name = $user_info['first_name'];
-        $last_name = $user_info['last_name'];
-        $user_create = $_SESSION['user'];
-        $query = "UPDATE `players` SET user_create='$user_create',last_update='$now',team_uuid='$team_uuid',firstname='$first_name',lastname='$last_name' WHERE id='$search_id'";
+        $query = "REPLACE INTO `players` (" . implode(',', $columns) . ") VALUES ($values)";
         $result = mysql_query($query);
         return $result;
     }
