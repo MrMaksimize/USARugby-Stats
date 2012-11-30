@@ -38,17 +38,6 @@ if ((!$ops = $request->get('ops')) || empty($iframe)) {
         echo "</div>\r";
       }
 
-      // Overall Game Score.
-     /* if (in_array('game_score', $ops)) {
-        if (empty($iframe)) {
-          echo "<h2>Score</h2>";
-        }
-        echo "<div id='score'>\r";
-        // Get the rosters for this game.
-        include_once './game_score.php';
-        echo "</div>\r";
-      }*/
-
       // Rosters
       if (in_array('game_rosters', $ops)) {
         if (empty($iframe)) {
