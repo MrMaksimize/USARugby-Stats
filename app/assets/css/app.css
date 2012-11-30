@@ -52,3 +52,7 @@ h3.popover-title {
 .player-popover-iframe {
 	width:100%;
 }
+
+.game-info-row [class*="span"], .game-info-sub-info-row .row-fluid [class*="span"] {
+  text-align: center;
+}

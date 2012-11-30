@@ -7,7 +7,7 @@ use Source\DataSource;
  * @return unknown
  */
 
-function teamName($id, $link = TRUE)
+function teamName($id, $link = TRUE, $image = TRUE)
 {
     $loader = new Twig_Loader_Filesystem(__DIR__.'/views');
     $twig = new Twig_Environment($loader, array());
@@ -15,10 +15,10 @@ function teamName($id, $link = TRUE)
     $team = $db->getTeam($id);
     $output = '';
     if ($team) {
-        $team['link'] = $link;
+        $team['settings'] = array('link' => $link, 'image' => $image);
         $logo_url = empty($team['logo_url']) ? '' : $team['logo_url'];
         $team['logo_url'] = getFullImageUrl($team['logo_url']);
-        $output = $twig->render('team_name.twig', $team);
+        $output = $twig->render('team_name.twig', array('team' => $team));
     }
 
     return $output;

@@ -28,7 +28,7 @@ if ((!$ops = $request->get('ops')) || empty($iframe)) {
     if (!empty($game_id)) {
       $game = $db->getGame($game_id);
       // Game Information.
-      if (in_array('game_info', $ops)) {
+      if (in_array('game_info', $ops) || in_array('game_score', $ops)) {
         echo "<div id='info' class='row-fluid'>\r";
         if (empty($iframe)) {
          // echo "<h1>Game Info</h1>";
@@ -39,7 +39,7 @@ if ((!$ops = $request->get('ops')) || empty($iframe)) {
       }
 
       // Overall Game Score.
-      if (in_array('game_score', $ops)) {
+     /* if (in_array('game_score', $ops)) {
         if (empty($iframe)) {
           echo "<h2>Score</h2>";
         }
@@ -47,7 +47,7 @@ if ((!$ops = $request->get('ops')) || empty($iframe)) {
         // Get the rosters for this game.
         include_once './game_score.php';
         echo "</div>\r";
-      }
+      }*/
 
       // Rosters
       if (in_array('game_rosters', $ops)) {

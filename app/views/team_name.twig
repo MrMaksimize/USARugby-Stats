@@ -1,0 +1,13 @@
+{% if team.settings.link %}
+    {% if team.settings.image %}
+        <a href='team.php?id={{ team.id }}'><img src='{{ team.logo_url }}' class='img-polaroid logo-picture group-logo-mini' alt='{{ team.short }}' onerror='imgError(this);'></img>{{ team.short }}</a>
+    {% else %}
+        <a href='team.php?id={{ team.id }}'>{{ team.short }}</a>
+    {% endif %}
+{% else %}
+    {% if team.settings.image %}
+        <img src='{{ team.logo_url }}' class='img-polaroid logo-picture group-logo-mini' alt='{{ team.short }}' onerror='imgError(this);'></img>{{ team.short }}
+    {% else %}
+        {{ team.short }}
+    {% endif %}
+{% endif %}
